@@ -1,120 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
 	<meta charset="UTF-8">
-	<title>作業09</title>
+		<title>基本統計量</title>
 	<style>
-        h4 {
-        color: orange;
-        }
-        lable{
-        color:skyblue;
-        }
-        input{
-        color:red;
-        }
-        div {
-        color: purple;
-        margin: 5px;
-        }
-        table {
-		    width:90%;
-		    border-color:dodgerblue;
-		    border-style:solid;
-		    border-collapse: collapse;
-		}
-		   tr {
-		   text-align:center;
-		   border-color:dodgerblue;
-		   border-style:solid;
-		   }
-		   td{
-		   vertical-align: middle;
-		   border-color: dodgerblue;
-		   border-style: solid;
-		   }
-           td:nth-child(1){
-           color:brown;
-           }
-    </style>
-
+	  #form02{
+	    color: red;
+	  }
+	  h4{
+	    color: blue;
+	  }
+	</style>
 </head>
-
 <body>
 <form id="form01">
-	<label>姓名:</label>
-	<input type="text" name="name01" value="陳蓉"><br>
-	<label>收件住址:</label>
-	<input type="text" name="address01" value="台北市大安區延吉街137巷7弄7號2樓"><br>
-	<label>電話:</label>
-	<input type="tel" name="tel01" value="0921311020"><br>
-	<label>電子郵件:</label>
-	<input type="email" name="email01" value="rong1020c@gmail.com"><br>
-	<label>指定送貨日期:</label>
-	<input type="date" name="date01"><br>
-	<label>水果種類:(四選一)</label><br>
-	<input type="radio" name="cake" id="cake01" value="愛文芒果(1箱)">愛文芒果(1箱)475元<br>
-	<input type="radio" name="cake" id="cake02" value="有機木瓜(6台斤)">有機木瓜(6臺斤)435元<br>
-	<input type="radio" name="cake" id="cake03" value="黑鑽石桑葚(5台斤)">黑鑽石桑葚(5台斤)749元<br>
-	<input type="radio" name="cake" id="cake04" value="晶鑽鳳梨(1公斤)">晶鑽鳳梨(1公斤)62元<br>
+  <lable>待輸入的資料個數為</lable>
+  <input type="number" name="number01" placeholder="0"><br>
 </form>
-<br>
-<button onclick="shoppingInfo()"><h4>結帳</h4></button>
-<div id="demo"></div>
+<button onclick="inputNo()">產生輸入表格</button>
+<div id="demo01"></div>
+<div id="demo02"></div>
 <script>
-   function shoppingInfo(){
-   const x = document.getElementById("form01");
-   var item ="";
-   var price = 0;
-   var text = "<h4>您的購買資訊如下:</h4>";
-   var i;
-   text += "<table>";
-   for(i = 0; i < 5; i++){
-   switch(i){
-   case 0:
-   item = "姓名: ";
-   break;
-   case 1:
-   item = "收件住址: ";
-   break;
-   case 2:
-   item = "電話: ";
-   break;
-   case 3:
-   item = "電子郵件: ";
-   break;
-   case 4:
-   item = "指定送貨日期: ";
-   break;
-   }
-   text += "<tr><td>" + item + "</td>"+"<td>"+ x.elements[i].value + "</td></tr>"+"<br>";
-   }
-   for(i=5;i<=8; i++){
-   if (x.elements[i].checked==true){
-   switch(i){
-   case 5:
-   price = 475;
-   break;
-   case 6:
-   price = 435;
-   break;
-   case 7:
-   price = 749;
-   break;
-   case 8:
-   price = 62;
-   break;
-   }
-   text +="<tr><td>" + "水果種類:" + "</td>"+"<td>"+ x.elements[i].value+"</td></tr>"+"<br>";
-   text +="<tr><td>" + "價格合計:" + "</td>"+"<td>"+ price+"元"+"</td></tr>"+"<br>";
-   text += "</table>";
-   }
-   }
-   document.getElementById("demo").innerHTML=text;
-   }
+  var no = 0;
+  function inputNo(){
+    const x = document.getElementById("form01");
+    var item = x.elements[0].value;
+    no = item;
+    text01 = "<form id=\"form02\">";
+    for(i=1;i<=item;i++){
+      text01 += i + ". ";
+      text01 += "<input type=\"text\">" + "<br>";
+    }
+    text01 += "</form>";
+    text01 += "<button onclick=\"stat()\">計算統計量</button>";
+    document.getElementById("demo01").innerHTML = text01;
+  }
+  function stat(){
+    const y = document.getElementById("form02");
+    var sum = 0;
+    var sum01 = 0;
+    text02 = "";
+    for(i=0;i<no;i++){
+      sum += Number(y.elements[i].value);
+      sum01 += Math.pow(Number(y.elements[i].value),2);
+      text02 += "第" + (i+1) + "個數值為"+ y.elements[i].value + "<br>";
+    }
+    text02 += "<br>";
+    text02 += "<h4>這" + no + "個數的平均數為 " + sum / no + "<h4>";
+    text02 += "<h4>這" + no + "個數的標準差為 " + Math.sqrt((sum01-sum*sum/no)/(no-1)) + "<h4>";
+    document.getElementById("demo02").innerHTML = text02;
+  }
 </script>
-
 </body>
-
 </html>
