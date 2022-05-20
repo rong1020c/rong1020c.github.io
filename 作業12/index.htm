@@ -1,120 +1,137 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
 	<meta charset="UTF-8">
-	<title>作業09</title>
+	<title>作業12</title>
 	<style>
-        h4 {
-        color: orange;
-        }
-        lable{
-        color:skyblue;
-        }
-        input{
-        color:red;
-        }
-        div {
-        color: purple;
-        margin: 5px;
-        }
+		h4 {
+		   color: PaleVioletRed;
+		}
+		div {
+		     color: SlateBlue;
+		     margin: 5px;
+		}
         table {
-		    width:90%;
-		    border-color:dodgerblue;
+		    width: 35%;
+		    border-color: rosybrown;
 		    border-style:solid;
 		    border-collapse: collapse;
 		}
-		   tr {
-		   text-align:center;
-		   border-color:dodgerblue;
-		   border-style:solid;
-		   }
-		   td{
-		   vertical-align: middle;
-		   border-color: dodgerblue;
-		   border-style: solid;
-		   }
-           td:nth-child(1){
-           color:brown;
-           }
-    </style>
-
+		tr:nth-child(2n+1) {
+		    background-color: PapayaWhip  ;
+		    text-align: left;
+		    border-color: rosybrown;
+		    border-style:solid;
+		}
+		td:nth-child(1){
+		    color: brown;
+		    text-align:left;
+		    border-color: rosybrown;
+		    border-style:solid;
+		}
+		td:nth-child(3){
+		    color: brown;
+		    text-align:left;
+		    border-color: rosybrown;
+		    border-style:solid;
+	</style>
 </head>
 
 <body>
 <form id="form01">
-	<label>姓名:</label>
-	<input type="text" name="name01" value="陳蓉"><br>
-	<label>收件住址:</label>
-	<input type="text" name="address01" value="台北市大安區延吉街137巷7弄7號2樓"><br>
-	<label>電話:</label>
-	<input type="tel" name="tel01" value="0921311020"><br>
-	<label>電子郵件:</label>
-	<input type="email" name="email01" value="rong1020c@gmail.com"><br>
-	<label>指定送貨日期:</label>
-	<input type="date" name="date01"><br>
-	<label>水果種類:(四選一)</label><br>
-	<input type="radio" name="cake" id="cake01" value="愛文芒果(1箱)">愛文芒果(1箱)475元<br>
-	<input type="radio" name="cake" id="cake02" value="有機木瓜(6台斤)">有機木瓜(6臺斤)435元<br>
-	<input type="radio" name="cake" id="cake03" value="黑鑽石桑葚(5台斤)">黑鑽石桑葚(5台斤)749元<br>
-	<input type="radio" name="cake" id="cake04" value="晶鑽鳳梨(1公斤)">晶鑽鳳梨(1公斤)62元<br>
+	姓名:<input type="text" name="name01" value="陳蓉"><br>
+	收件地址:<input type="text" name="address01" value="台北市大安區延吉街137巷7弄"><br>
+	電話:<input type="tel" name="tel01" value="0921311020"><br>
+	電子郵件:<input type="email" name="email01" value="rong1020c@gmail.com"><br>
+	指定送貨日期:<input type="date" name="date01" ><br>
+	糕餅種類:<br><input type="checkbox" name="cake" id="cake01" value="奶油酥餅(1盒) 400元">奶油酥餅(1盒) 400元;
+	購買數量:<input type="number" name="number01"><br>
+	<input type="checkbox" name="cake" id="cake02" value="布朗尼(1盒) 120元">布朗尼(1盒) 120元;
+	購買數量:<input type="number" name="number02"><br>
+	<input type="checkbox" name="cake" id="cake03" value="巧克力軟餅乾(3入) 150元">巧克力軟餅乾(3入) 150元;
+	購買數量:<input type="number" name="number03"><br>
+	<input type="checkbox" name="cake" id="cake04" value="瑪德蓮蛋糕(1袋) 80元">瑪德蓮蛋糕(1袋) 80元;
+	購買數量:<input type="number" name="number04"><br>
 </form>
 <br>
 <button onclick="shoppingInfo()"><h4>結帳</h4></button>
 <div id="demo"></div>
 <script>
-   function shoppingInfo(){
-   const x = document.getElementById("form01");
-   var item ="";
-   var price = 0;
-   var text = "<h4>您的購買資訊如下:</h4>";
-   var i;
-   text += "<table>";
-   for(i = 0; i < 5; i++){
-   switch(i){
-   case 0:
-   item = "姓名: ";
-   break;
-   case 1:
-   item = "收件住址: ";
-   break;
-   case 2:
-   item = "電話: ";
-   break;
-   case 3:
-   item = "電子郵件: ";
-   break;
-   case 4:
-   item = "指定送貨日期: ";
-   break;
-   }
-   text += "<tr><td>" + item + "</td>"+"<td>"+ x.elements[i].value + "</td></tr>"+"<br>";
-   }
-   for(i=5;i<=8; i++){
-   if (x.elements[i].checked==true){
-   switch(i){
-   case 5:
-   price = 475;
-   break;
-   case 6:
-   price = 435;
-   break;
-   case 7:
-   price = 749;
-   break;
-   case 8:
-   price = 62;
-   break;
-   }
-   text +="<tr><td>" + "水果種類:" + "</td>"+"<td>"+ x.elements[i].value+"</td></tr>"+"<br>";
-   text +="<tr><td>" + "價格合計:" + "</td>"+"<td>"+ price+"元"+"</td></tr>"+"<br>";
-   text += "</table>";
-   }
-   }
-   document.getElementById("demo").innerHTML=text;
+    var text = "<h4>您的購物資訊如下:</h4>";
+    text += "<table>";
+	var cake = function (cakeType, cakePrice, no){
+	    this.Type = cakeType;
+	    this.Price = cakePrice;
+	    this.subTotal = function(no){
+	        text += "<tr>"
+		    text += "<td>" + "蛋糕種類: " + "</td>" + "<td>" + this.Type + "</td>" + "<td>" + no + "單位<br>" + "</td>";
+		    text += "</tr>"
+	        text += "<tr>"
+		    text += "<td>" + "價格小計: " + "</td>" + "<td>" + this.Price * no + "元" + "</td>" + "<td>" + "  " + "</td>";
+		    text += "</tr>"
+	    };
+	};
+	var cake01 = new cake("奶油酥餅(1盒)",400,0);
+	var cake02 = new cake("布朗尼(1盒)",120,0);
+	var cake03 = new cake("巧克力軟餅乾(3入)",150,0);
+	var cake04 = new cake("瑪德蓮蛋糕(1袋)",80,0);
+
+	function shoppingInfo() {
+	    var x = document.getElementById("form01");
+	    var item = "";
+	    var price = 0;
+	    var sumToPay = 0;
+	    var i;
+	    for (i = 0; i < 5; i++) {
+	        switch (i) {
+	            case 0:
+	                 item = "姓名: ";
+	                 break;
+	            case 1:
+	                 item = "收件地址: ";
+	                 break;
+	            case 2:
+	                 item = "電話: ";
+	                 break;
+	            case 3:
+	                 item = "電子郵件: ";
+	                 break;
+	            case 4:
+	                 item = "指定送貨日期: ";
+	                 break;
+	        }
+	        text += "<tr>"
+		    text += "<td>" + item + "</td>" + "<td>" + x.elements[i].value + "<br>" + "</td>" + "<td>" + "  " + "</td>";
+		    text += "</tr>"
+	}
+	for (i=5; i<=11; i++) {
+	     if (x.elements[i].checked == true) {
+	         switch(i){
+	             case 5: cake01.no = x.elements[i+1].value;
+	                     sumToPay += cake01.Price * cake01.no;
+	                     cake01.subTotal(cake01.no);
+	                     break;
+	             case 7: cake02.no = x.elements[i+1].value;
+	                     sumToPay += cake02.Price * cake02.no;
+	                     cake02.subTotal(cake02.no);
+	                     break;
+	             case 9: cake03.no = x.elements[i+1].value;
+	                     sumToPay += cake03.Price * cake03.no;
+	                     cake03.subTotal(cake03.no);
+	                     break;
+	             case 11: cake04.no = x.elements[i+1].value;
+	                      sumToPay += cake04.Price * cake04.no;
+	                      cake04.subTotal(cake04.no);
+	                      break;
+	         }
+	     }
+	}
+	text += "<tr>"
+	text += "<td>" + "<h4><b>" + "價格合計: " + "</h4></b>" + "</td>" + "<td>" + "<h4><b>" + sumToPay + "元<br>" + "</b></h4>"+ "</td>" + "<td>" + "  " + "</td>";
+	text += "</tr>"
+	document.getElementById("demo").innerHTML = text;
+	text += "</table>";
    }
 </script>
-
 </body>
-
 </html>
